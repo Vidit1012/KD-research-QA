@@ -3,8 +3,11 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Optional
 from chat import generate_answer
+from prometheus_fastapi_instrumentator import Instrumentator
 
 app = FastAPI(title="Knowledge Distillation RAG API")
+
+Instrumentator().instrument(app).expose(app)
 
 
 class QueryRequest(BaseModel):
